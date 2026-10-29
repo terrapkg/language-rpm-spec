@@ -16,8 +16,8 @@
 'fileTypes': [
   'spec'
 ]
-'foldingStartMarker': '(^%(build$|changelog|check$|clean$|description|files|install$|package|prep$|preun|pretrans|(pre($| .*))|posttrans|postun|post|trigger|triggerin|triggerpostun|triggerun|verifyscript)\\s*$)'
-'foldingStopMarker': '(^%(build$|changelog|check$|clean$|description|files|install$|package|pre(p|un|trans)?|post(trans|un)?|trigger(in|postun|un)?|verifyscript)\\s*$)|\Z'
+'foldingStartMarker': '(^%(build$|changelog|check$|clean$|description|files|install$|package|patchlist|prep$|preun|pretrans|(pre($| .*))|posttrans|postun|post|sourcelist|trigger|triggerin|triggerpostun|triggerun|verifyscript)\\s*$)'
+'foldingStopMarker': '(^%(build$|changelog|check$|clean$|description|files|install$|package|patchlist|sourcelist|pre(p|un|trans)?|post(trans|un)?|trigger(in|postun|un)?|verifyscript)\\s*$)|\Z'
 'name': 'RPMSpec'
 'patterns': [
   {
@@ -293,11 +293,11 @@
         'name': 'keyword.rpm-spec'
       }
       {
-        'match': '^(Vendor|Packager|Group|Source\\d*|Patch\\d*|BuildRoot|Prefix):',
+        'match': '^(Vendor|Packager|Group|Source\\d*|Patch\\d*|BuildRoot|Prefix|Prefixes|RemovePathPostfixes):',
         'name': 'keyword.rpm-spec'
       }
       {
-        'match': '^(Name|Version|Release|Url|URL|BugURL|VCS|ModularityLabel|DistTag):',
+        'match': '^(Name|Version|Release|Url|URL|BugURL|VCS|ModularityLabel|DistTag|DocDir|TranslationURL|UpstreamReleases):',
         'name': 'keyword.rpm-spec'
       }
       {
@@ -334,7 +334,7 @@
     # see https://fedoraproject.org/wiki/How_to_create_an_RPM_package
     'patterns': [
       {
-        'match': '^(%(?:setup|patch[0-9]*|configure|autosetup))',
+        'match': '^(%(?:setup|patch[0-9]*|autopatch|configure|autosetup))\\b',
         'captures':
           '1':
             'name': 'support.function.rpm-spec'
@@ -419,7 +419,7 @@
   'sections':
     'patterns': [
       {
-        'match': '^%(?:description|package)',
+        'match': '^%(?:description|package|patchlist|sourcelist)\\b',
         'name': 'entity.name.section.rpm-spec'
       }
       {
@@ -463,7 +463,7 @@
         'name': 'entity.name.section.rpm-spec'
       }
       {
-        'begin': '^(%(?:preun|prep|pretrans|pre|posttrans|postun|post|packagepreun))',
+        'begin': '^(%(?:filetriggerin|filetriggerun|filetriggerpostun|pre|pretrans|preuntrans|preun|prep|pretrans|pre|posttrans|postun|postuntrans|post|packagepreun|transfiletriggerin|transfiletriggerpostun|transfiletriggerun|triggerprein|triggerin|triggerun|triggerpostun))',
         'beginCaptures':
           '1':
               'name': 'entity.name.section.rpm-spec',
@@ -680,7 +680,7 @@
   'modifiers':
     'patterns': [
       {
-        'match': '^%(?:define|global|undefine|docdir|doc)',
+        'match': '^%(?:artifact|define|dir|doc|docdir|ghost|global|missingok|readme|undefine)',
         'name': 'storage.modifier.rpm-spec'
       }
       {
